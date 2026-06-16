@@ -89,6 +89,12 @@ From the code:
   Distance readings from both sensors and free space percentage are printed to the Serial Monitor for debugging.
 
 ---
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7089f13f-24dc-469d-ae85-9516eb6b6ead"
+       alt="Smart Automated Dustbin"
+       width="500">
+</p>
+---
 
 ## How the Code Works
 

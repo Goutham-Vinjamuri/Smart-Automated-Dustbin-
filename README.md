@@ -142,10 +142,12 @@ The Serial Monitor displays:
 ## 🖼️ Project Preview
 
 <p align="center">
-  <img width="500" height="1552" alt="Smart Automated Dustbin" src="https://github.com/user-attachments/assets/a8a1a5d8-bf04-4d9a-a38a-88a011fe007b" />
-
+  <img
+    src="https://github.com/user-attachments/assets/a8a1a5d8-bf04-4d9a-a38a-88a011fe007b"
+    alt="Smart Automated Dustbin"
+    width="450"
+  />
 </p>
-
 ---
 
 ## ⚙️ How It Works

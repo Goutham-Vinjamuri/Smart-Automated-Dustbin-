@@ -1,192 +1,456 @@
-# Smart Automated Dustbin Using Arduino
+# 🗑️ Smart Automated Dustbin Using Arduino
 
-This project implements a touchless smart dust bin using Arduino, ultrasonic sensors, a servo motor, an LCD, and a buzzer to automate lid opening and monitor bin fill level.
-
----
-
-## About the Project
-
-The Smart Dust Bin is designed to open its lid automatically when a user’s hand or object is detected near the bin and to display how much free space is left inside the bin. 
-It uses one ultrasonic sensor to detect a nearby user and another ultrasonic sensor to measure the distance to the trash level, calculating the percentage of free space and showing it on a 16x2 LCD along with simple emoji-style feedback. 
-
-This is an embedded systems mini-project suitable for academic demonstration and practical automation applications, promoting hygiene by avoiding direct contact with the dust bin lid. 
+> A touchless smart dustbin that automatically opens its lid, monitors bin fill level, and provides real-time status feedback using Arduino and ultrasonic sensors.
 
 ---
 
-## Hardware Components
+## 📌 About the Project
 
-- Arduino board (e.g., Arduino Uno)  
-- Ultrasonic Sensor 1 (for user detection)  
-- Ultrasonic Sensor 2 (for bin level detection)  
-- Servo motor (for lid control)  
-- 16x2 LCD display (LiquidCrystal)  
-- Buzzer (connected to analog pin A5 in the code)  
-- Connecting wires and breadboard  
-- Power supply (USB or external 5V)  
+The **Smart Automated Dustbin** is an embedded systems project designed to provide **touchless waste disposal** and **automatic bin-level monitoring**.
 
-The pin mapping follows a typical smart dustbin setup with ultrasonic sensors, servo, and LCD connected to Arduino digital pins. [web:20][web:22][web:25]
+The system uses:
 
----
+* **Ultrasonic Sensor 1** → Detects a user's hand/object near the dustbin.
+* **Servo Motor** → Automatically opens and closes the lid.
+* **Ultrasonic Sensor 2** → Measures the distance to the trash level.
+* **16x2 LCD** → Displays lid status, free-space percentage, and feedback.
+* **Buzzer** → Provides audible alerts for lid actions and a nearly full bin.
 
-## Pin Configuration
+The system calculates the **percentage of free space** remaining inside the bin and displays it on the LCD using simple emoji-style indicators.
 
-From the code:
-
-- LCD:
-  - `rs` → pin 8  
-  - `en` → pin 9  
-  - `d4` → pin 10  
-  - `d5` → pin 11  
-  - `d6` → pin 12  
-  - `d7` → pin 13  
-
-- Ultrasonic Sensor 1 (for user detection):
-  - `TRIGGER_PIN_1` → pin 2  
-  - `ECHO_PIN_1` → pin 3  
-
-- Ultrasonic Sensor 2 (for bin level):
-  - `TRIGGER_PIN_2` → pin 5  
-  - `ECHO_PIN_2` → pin 4  
-
-- Servo:
-  - Servo signal → pin 6 (attached in code)  
-
-- Buzzer:
-  - `buz` → pin A5  
+This project demonstrates practical applications of **Arduino, sensors, actuator control, LCD interfacing, and embedded automation** while promoting better hygiene through touchless operation.
 
 ---
 
-## Features
+## ✨ Features
 
-- **Automatic lid opening**  
-  Uses Ultrasonic Sensor 1 to detect an object within 30 cm, and opens the lid using a servo motor. [web:16][web:20][web:22][web:25]
+### 🤖 Automatic Lid Opening
 
-- **Automatic lid closing**  
-  When the user moves away, the lid closes automatically and a short buzzer beep is triggered to indicate lid actions.
+* Ultrasonic Sensor 1 detects an object within **30 cm**.
+* Servo motor rotates the lid to the open position.
+* A short buzzer beep indicates the lid action.
 
-- **Bin fill level monitoring**  
-  Ultrasonic Sensor 2 measures the distance from the sensor to the trash level and computes the free space percentage based on a configurable maximum bin height (`maxBinHeight`). 
+### 🔒 Automatic Lid Closing
 
-- **LCD status display**  
-  The 16x2 LCD shows:
-  - Current lid status: `OPEN` or `CLOSED`  
-  - Free space percentage in the bin  
-  - Emoji-like feedback:
-    - `:)` when more than 50% free  
-    - `:|` when between 20% and 50% free  
-    - `:(` when less than 20% free  
+* When the detected object moves away, the lid automatically closes.
+* A short buzzer beep confirms the closing action.
 
-- **Bin full alert**  
-  When free space falls to 10% or less, the system:
-  - Activates the buzzer  
-  - Displays `BIN FULL!` and `EMPTY PLEASE` on the LCD  
-  - Prints a “BIN FULL ALERT” message on the Serial Monitor  
+### 📊 Bin Fill-Level Monitoring
 
-- **Calibration / stability logic**  
-  After any lid movement, the system waits for a stabilization delay (`LID_STABILIZE_DELAY`) before reading the level sensor to avoid false readings due to motion. 
+* Ultrasonic Sensor 2 measures the distance between the sensor and the trash.
+* The system calculates the remaining free space.
+* Free-space percentage is displayed on the LCD.
 
-- **Serial debugging**  
-  Distance readings from both sensors and free space percentage are printed to the Serial Monitor for debugging.
+### 🖥️ LCD Status Display
+
+The 16x2 LCD displays:
+
+| Free Space    | Feedback |   |
+| ------------- | -------- | - |
+| **> 50%**     | `:)`     |   |
+| **20% – 50%** | `:       | ` |
+| **< 20%**     | `:(`     |   |
+
+The LCD also displays the current lid status:
+
+* `OPEN`
+* `CLOSED`
+
+### 🚨 Bin Full Alert
+
+When free space reaches **10% or less**:
+
+* Buzzer is activated.
+* LCD displays `BIN FULL!`
+* LCD displays `EMPTY PLEASE`
+* Serial Monitor prints `*** BIN FULL ALERT ***`
+
+### ⚙️ Sensor Stability Logic
+
+After lid movement, the system waits for `LID_STABILIZE_DELAY` before measuring the bin level.
+
+This prevents inaccurate readings caused by temporary movement or vibration.
+
+### 🖥️ Serial Debugging
+
+The Serial Monitor displays:
+
+* Sensor 1 distance
+* Sensor 2 distance
+* Free-space percentage
+* Bin-full alerts
 
 ---
+
+## 🧰 Hardware Components
+
+| Component                         | Purpose                    |
+| --------------------------------- | -------------------------- |
+| Arduino board (e.g., Arduino Uno) | Main controller            |
+| Ultrasonic Sensor 1               | User/object detection      |
+| Ultrasonic Sensor 2               | Bin fill-level measurement |
+| Servo Motor                       | Lid control                |
+| 16x2 LCD                          | Status display             |
+| Buzzer                            | Audible alerts             |
+| Connecting wires                  | Circuit connections        |
+| Breadboard                        | Prototyping                |
+| USB / External 5V supply          | Power                      |
+
+---
+
+## 🔌 Pin Configuration
+
+### LCD — `LiquidCrystal`
+
+| LCD Pin | Arduino Pin |
+| ------- | ----------: |
+| `rs`    |           8 |
+| `en`    |           9 |
+| `d4`    |          10 |
+| `d5`    |          11 |
+| `d6`    |          12 |
+| `d7`    |          13 |
+
+### Ultrasonic Sensor 1 — User Detection
+
+| Pin             | Arduino Pin |
+| --------------- | ----------: |
+| `TRIGGER_PIN_1` |           2 |
+| `ECHO_PIN_1`    |           3 |
+
+### Ultrasonic Sensor 2 — Bin Level
+
+| Pin             | Arduino Pin |
+| --------------- | ----------: |
+| `TRIGGER_PIN_2` |           5 |
+| `ECHO_PIN_2`    |           4 |
+
+### Servo Motor
+
+| Connection   | Arduino Pin |
+| ------------ | ----------: |
+| Servo Signal |           6 |
+
+### Buzzer
+
+| Connection | Arduino Pin |
+| ---------- | ----------: |
+| `buz`      |          A5 |
+
+---
+
+## 🖼️ Project Preview
+
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/7089f13f-24dc-469d-ae85-9516eb6b6ead"
+  <img src="[https://github.com/user-attachments/assets/7089f13f-24dc-469d-ae85-9516eb6b6ead](https://github.com/user-attachments/assets/7089f13f-24dc-469d-ae85-9516eb6b6ead)"
        alt="Smart Automated Dustbin"
        width="500">
 </p>
----
-
-## How the Code Works
-
-1. **Initialization (`setup`)**  
-   - Initializes the LCD, servo, buzzer, and ultrasonic sensor pins.  
-   - Sets the lid to the closed position (`myservo.write(0)` and `isOpen = false`).  
-   - Displays a welcome message “WELCOME SMART DUST BIN” on the LCD for 5 seconds.
-
-2. **Distance measurement (`readSensor`)**  
-   - Sends a 10 µs trigger pulse to the ultrasonic sensor.  
-   - Uses `pulseIn` to measure the echo pulse duration with a timeout of 30 ms.  
-   - Converts the duration to distance in centimeters.  
-   - Returns `-1` if the reading is invalid or out of range (less than 2 cm or greater than 200 cm).
-
-3. **User detection and lid control**  
-   - Reads distance from Sensor 1.  
-   - If a valid reading is less than 30 cm and the lid is closed:
-     - Opens the lid (`myservo.write(140)`), sets `isOpen = true`, updates `lastLidActionTime`, and gives a short buzzer beep.  
-   - When the user is no longer near and the lid was open:
-     - Closes the lid (`myservo.write(0)`), sets `isOpen = false`, updates `lastLidActionTime`, and gives another beep.
-
-4. **Bin level measurement and free space calculation**  
-   - After the stabilization delay from the last lid action, reads distance from Sensor 2.  
-   - If valid, computes:
-     \[
-     \text{freePercentage} = \frac{\text{distance\_2} \times 100}{\text{maxBinHeight}}
-     \]
-     and caps it at 100.  
-   - Displays this percentage and the corresponding emoji on the LCD.
-
-5. **Bin full detection**  
-   - If:
-     - Enough time has passed since the last lid action,
-     - Sensor 2 reading is valid, and
-     - `freePercentage <= 10`,  
-
-     then it:
-     - Activates the buzzer,  
-     - Displays “BIN FULL!” and “EMPTY PLEASE” on the LCD,  
-     - Logs `*** BIN FULL ALERT ***` over Serial,  
-     - Adds small delays to avoid rapid retriggering.
-
-6. **Loop delay**  
-   - A `delay(500)` at the end to reduce flickering and constant triggering.
 
 ---
 
-## Getting Started
+## ⚙️ How It Works
+
+### 1. Initialization — `setup()`
+
+During startup, the system:
+
+* Initializes the LCD.
+* Initializes the servo.
+* Initializes the buzzer.
+* Configures ultrasonic sensor pins.
+* Sets the lid to the closed position:
+
+```cpp
+myservo.write(0);
+isOpen = false;
+```
+
+* Displays:
+
+```text
+WELCOME SMART DUST BIN
+```
+
+for **5 seconds**.
+
+---
+
+### 2. Distance Measurement — `readSensor()`
+
+The ultrasonic sensor:
+
+1. Receives a **10 µs trigger pulse**.
+2. Measures the returning echo using `pulseIn`.
+3. Uses a **30 ms timeout**.
+4. Converts echo duration into distance in centimeters.
+5. Returns `-1` for invalid readings.
+
+Valid distance range:
+
+```text
+2 cm ≤ distance ≤ 200 cm
+```
+
+---
+
+### 3. User Detection & Lid Control
+
+Sensor 1 continuously checks for a nearby object.
+
+If:
+
+```text
+distance < 30 cm
+```
+
+and the lid is closed:
+
+```cpp
+myservo.write(140);
+isOpen = true;
+```
+
+The system:
+
+* Opens the lid.
+* Updates `lastLidActionTime`.
+* Produces a short buzzer beep.
+
+When the user moves away:
+
+```cpp
+myservo.write(0);
+isOpen = false;
+```
+
+The lid closes and another beep is generated.
+
+---
+
+### 4. Bin-Level Measurement
+
+After the stabilization delay, Sensor 2 measures the distance to the trash.
+
+The free-space percentage is calculated using:
+
+$$
+\text{freePercentage}
+=
+\frac{\text{distance\_2} \times 100}
+{\text{maxBinHeight}}
+$$
+
+The result is limited to a maximum of **100%**.
+
+---
+
+### 5. Bin-Full Detection
+
+The bin is considered nearly full when:
+
+```text
+freePercentage <= 10
+```
+
+provided that:
+
+* The lid stabilization period has completed.
+* Sensor 2 provides a valid reading.
+
+The system then:
+
+* Activates the buzzer.
+* Displays `BIN FULL!`.
+* Displays `EMPTY PLEASE`.
+* Prints:
+
+```text
+*** BIN FULL ALERT ***
+```
+
+to the Serial Monitor.
+
+---
+
+### 6. Loop Delay
+
+A:
+
+```cpp
+delay(500);
+```
+
+is used at the end of the loop to reduce:
+
+* LCD flickering.
+* Excessive sensor triggering.
+* Rapid repeated alerts.
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Arduino IDE installed. [web:20][web:22]  
-- Correct board selected (e.g., Arduino Uno) and COM port configured in the Arduino IDE. [web:22][web:23]  
-- All hardware components wired according to the pin configuration section.
+* Arduino IDE
+* Compatible Arduino board such as **Arduino Uno**
+* Correct COM port
+* All hardware connected according to the pin configuration
 
-### Installation and Upload
+### Installation & Upload
 
-1. Connect your Arduino board to your PC via USB.  
-2. Open the Arduino IDE.  
-3. Create a new sketch and paste the provided code.  
-4. Go to:
-   - **Tools → Board** → select your board (e.g., Arduino Uno).  
-   - **Tools → Port** → select the correct COM port.  
-5. Click the **Upload** button to flash the code to the Arduino. 
+1. Connect the Arduino board to the PC using USB.
 
----
+2. Open **Arduino IDE**.
 
-## Usage
+3. Create a new sketch.
 
-- Power up the Arduino and dust bin circuit.  
-- On startup, the LCD will show the welcome message and then switch to real-time status.  
-- Bring your hand or an object close to the front sensor:
-  - The lid should automatically open.
-  - You will hear a short beep.  
-- Move your hand away:
-  - The lid closes automatically and beeps again.  
-- As the bin fills, observe the “Free %” and emoji on the LCD.  
-- When the bin is almost full (≤ 10% free), the buzzer will sound and the LCD will display the “BIN FULL!” message.
+4. Paste the project code.
+
+5. Select:
+
+   **Tools → Board → Arduino Uno**
+
+6. Select:
+
+   **Tools → Port → COM Port**
+
+7. Click **Upload**.
 
 ---
 
-## Future Improvements
+## 🧪 Usage
 
-- Add an IoT module (e.g., ESP8266) to send bin status to a cloud dashboard or mobile app. 
-- Add a real-time clock (RTC) to log when the bin becomes full.  
-- Use a battery-powered or solar-powered version for outdoor usage.  
-- Implement a more advanced filtering or averaging of sensor readings to reduce noise.
+### Step 1 — Power On
+
+Power the Arduino and dustbin circuit.
+
+The LCD initially displays:
+
+```text
+WELCOME SMART DUST BIN
+```
+
+### Step 2 — Approach the Dustbin
+
+Place your hand or an object within **30 cm** of the front ultrasonic sensor.
+
+Expected behavior:
+
+```text
+Object detected
+      ↓
+Servo activates
+      ↓
+Lid opens
+      ↓
+Buzzer beeps
+```
+
+### Step 3 — Move Away
+
+When the object moves away:
+
+```text
+Object absent
+      ↓
+Servo activates
+      ↓
+Lid closes
+      ↓
+Buzzer beeps
+```
+
+### Step 4 — Monitor Fill Level
+
+As waste accumulates, Sensor 2 measures the remaining free space.
+
+The LCD displays:
+
+```text
+Free: XX%
+```
+
+along with the corresponding feedback symbol.
+
+### Step 5 — Bin Full Alert
+
+When free space reaches **10% or less**:
+
+```text
+BIN FULL!
+EMPTY PLEASE
+```
+
+The buzzer also provides an audible warning.
 
 ---
 
-## Author
+## 🔄 System Flow
 
-- Name: Goutham  
-- Role: Undergraduate engineering student / embedded systems enthusiast  
-- Project Type: Academic mini-project / embedded systems project  
+```text
+                 ┌───────────────────┐
+                 │   Arduino UNO     │
+                 └─────────┬─────────┘
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+              ▼                         ▼
+     Ultrasonic Sensor 1       Ultrasonic Sensor 2
+       User Detection            Bin-Level Detection
+              │                         │
+              ▼                         ▼
+        Servo Motor             Free-Space Calculation
+              │                         │
+              ▼                         ▼
+         Lid Control              16x2 LCD Display
+                                        │
+                                        ▼
+                                  Buzzer Alert
+```
+```
+## 📄 Project Information
+
+| Category         | Details                    |
+| ---------------- | -------------------------- |
+| **Project**      | Smart Automated Dustbin    |
+| **Domain**       | Embedded Systems           |
+| **Controller**   | Arduino                    |
+| **Sensors**      | Ultrasonic Sensors         |
+| **Actuator**     | Servo Motor                |
+| **Display**      | 16x2 LCD                   |
+| **Alert**        | Buzzer                     |
+| **Project Type** | Academic Mini-Project      |
+| **Application**  | Touchless Waste Management |
+
+---
+
+---
+
+## 🔮 Future Improvements
+
+* Add an **ESP8266/ESP32 IoT module** for remote bin monitoring.
+* Send bin-level information to a **cloud dashboard or mobile application**.
+* Add an **RTC module** to record when the bin becomes full.
+* Develop a **battery-powered or solar-powered version**.
+* Implement sensor **filtering and averaging** to reduce measurement noise.
+* Add wireless notifications when the bin requires emptying.
+
+---
+
+## 👨‍💻 Author
+
+**Goutham Vinjamuri**
+
+**B.Tech – Electronics and Communication Engineering**
+**Vellore Institute of Technology – Andhra Pradesh**
+**Expected Graduation: 2028**
+
+**Interests:** Embedded Systems • IoT • Hardware Projects • Automation
+
+### 🔗 Connect
+* **LinkedIn:** https://www.linkedin.com/in/goutham-vinjamuri-902787326/
+```
+
+⭐ **An Arduino-based embedded automation project for touchless waste disposal and real-time bin monitoring.**

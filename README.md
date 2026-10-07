@@ -45,11 +45,11 @@ This project demonstrates practical applications of **Arduino, sensors, actuator
 
 The 16x2 LCD displays:
 
-| Free Space    | Feedback |   |
-| ------------- | -------- | - |
-| **> 50%**     | `:)`     |   |
-| **20% – 50%** | `:       | ` |
-| **< 20%**     | `:(`     |   |
+| Free Space    | Feedback |
+| ------------- | -------- |
+| **> 50%**     | `:)`     |
+| **20% – 50%** | `:\|`    |
+| **< 20%**     | `:(`     |
 
 The LCD also displays the current lid status:
 
@@ -148,6 +148,7 @@ The Serial Monitor displays:
     width="450"
   />
 </p>
+
 ---
 
 ## ⚙️ How It Works
@@ -410,22 +411,6 @@ The buzzer also provides an audible warning.
                                         ▼
                                   Buzzer Alert
 ```
-```
-## 📄 Project Information
-
-| Category         | Details                    |
-| ---------------- | -------------------------- |
-| **Project**      | Smart Automated Dustbin    |
-| **Domain**       | Embedded Systems           |
-| **Controller**   | Arduino                    |
-| **Sensors**      | Ultrasonic Sensors         |
-| **Actuator**     | Servo Motor                |
-| **Display**      | 16x2 LCD                   |
-| **Alert**        | Buzzer                     |
-| **Project Type** | Academic Mini-Project      |
-| **Application**  | Touchless Waste Management |
-
----
 
 ---
 
@@ -447,10 +432,10 @@ The buzzer also provides an audible warning.
 **B.Tech – Electronics and Communication Engineering**
 **Vellore Institute of Technology – Andhra Pradesh**
 
-**Interests:** Embedded Systems • IoT • Hardware Projects • Automation
-
 ### 🔗 Connect
+
 * **LinkedIn:** https://www.linkedin.com/in/goutham-vinjamuri-902787326/
-```
+
+---
 
 ⭐ **An Arduino-based embedded automation project for touchless waste disposal and real-time bin monitoring.**

@@ -142,9 +142,8 @@ The Serial Monitor displays:
 ## 🖼️ Project Preview
 
 <p align="center">
-  <img src="[https://github.com/user-attachments/assets/7089f13f-24dc-469d-ae85-9516eb6b6ead](https://github.com/user-attachments/assets/7089f13f-24dc-469d-ae85-9516eb6b6ead)"
-       alt="Smart Automated Dustbin"
-       width="500">
+  <img width="500" height="1552" alt="Smart Automated Dustbin" src="https://github.com/user-attachments/assets/a8a1a5d8-bf04-4d9a-a38a-88a011fe007b" />
+
 </p>
 
 ---
@@ -445,7 +444,6 @@ The buzzer also provides an audible warning.
 
 **B.Tech – Electronics and Communication Engineering**
 **Vellore Institute of Technology – Andhra Pradesh**
-**Expected Graduation: 2028**
 
 **Interests:** Embedded Systems • IoT • Hardware Projects • Automation
 
